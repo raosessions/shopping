@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
 		List<User> users = jdbcTemplate.query(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				PreparedStatement ps = con.prepareStatement("select * from users where email = ? ");
+				PreparedStatement ps = con.prepareStatement("select * from users u left join authorities a on u.userid = a.userid where email= ?");
 				ps.setString(1, userName);
 				return ps;
 			}
@@ -68,6 +68,11 @@ class UserRowMapper implements RowMapper<User> {
 		u.setEmail(rs.getString("email"));
 		u.setPassword(rs.getString("password"));
 		u.setName(rs.getString("name"));
+		String role = rs.getString("authority") ;
+		if ( role == null ) {
+			role = "USER" ;
+		}
+		u.setRole(role);
 		return u;
 	}
 	

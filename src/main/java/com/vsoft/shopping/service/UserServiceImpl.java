@@ -14,7 +14,7 @@ import com.vsoft.shopping.model.User;
 import com.vsoft.shopping.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserRepository userRepository;
