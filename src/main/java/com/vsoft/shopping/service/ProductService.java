@@ -21,4 +21,9 @@ public class ProductService {
 	public List<Product> getProducts() {
 		return this.productRepository.findAll();
 	}
+	
+	public Product getProduct(int id) {
+		Product p = this.productRepository.findById(id).get();
+		return p;
+	}
 }
